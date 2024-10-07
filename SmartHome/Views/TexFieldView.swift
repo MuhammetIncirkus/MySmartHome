@@ -16,6 +16,11 @@ struct TexFieldView: View {
         VStack{
             HStack{
                 TextField("Bitte ein Namen Eingeben", text: $itemName)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    
+                    .cornerRadius(30)
+                    .formStyle(.columns)
                 Button("Hinzufügen"){
                     itemName2 = itemName
                 }
@@ -25,8 +30,10 @@ struct TexFieldView: View {
                 .clipShape(Capsule())
                 
             }
-            Text(itemName2)
-        }.padding()
+            Text(itemName2).foregroundStyle(.white)
+        }
+        .padding()
+        .background(.grayBackground)
     }
     
 }

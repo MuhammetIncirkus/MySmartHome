@@ -11,21 +11,35 @@ struct SmartHomeView: View {
     
     @State var itemName = ""
     @State var itemName2 = ""
-    @State var roomViewVisible = false
+    @State var roomViewVisible = true
+    @State var smartHomeName = "My Home"
     
     var body: some View {
-        TexFieldView(itemName: $itemName, itemName2: $itemName2)
-        Spacer()
-        
-        if roomViewVisible{
-            RoomView(roomViewVisible: $roomViewVisible)
-        }
-        Spacer()
-        Toggle(
-            roomViewVisible ? "Raumvorschau anzeigen" : "Raumvorschau ausblenden",
-            isOn: $roomViewVisible
-        )
-        .padding()
+        VStack{
+            HeaderView(smartHomeName: $smartHomeName)
+                .frame(maxHeight: 60)
+            VStack{
+                
+            
+            TexFieldView(itemName: $itemName, itemName2: $itemName2)
+            Spacer()
+            
+            if roomViewVisible{
+                RoomView(roomViewVisible: $roomViewVisible)
+            }
+            Spacer()
+            
+            }
+            .background(.grayBackground)
+            
+            Toggle(
+                roomViewVisible ? "Raumvorschau anzeigen" : "Raumvorschau ausblenden",
+                isOn: $roomViewVisible
+            )
+            .padding()
+            .foregroundStyle(.white)
+            
+        }.background(.blueBackground)
     }
 }
 

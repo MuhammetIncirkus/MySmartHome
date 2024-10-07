@@ -49,7 +49,7 @@ struct RoomView: View {
                 .clipped()
                 .cornerRadius(20)
                 .padding()
-                .shadow(radius: 10)
+                .shadow(color: .blue ,radius: 10)
             
             Button(action: {
                 roomViewVisible.toggle()
@@ -60,7 +60,7 @@ struct RoomView: View {
                     .clipShape(Circle())
             }
             .padding([.top, .trailing], 30)
-        }
+        }.background(.grayBackground)
         
     }
 }
