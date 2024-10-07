@@ -18,7 +18,7 @@ struct SmartHomeView: View {
         Spacer()
         
         if roomViewVisible{
-            RoomView()
+            RoomView(roomViewVisible: $roomViewVisible)
         }
         Spacer()
         Toggle(
