@@ -18,7 +18,6 @@ struct TexFieldView: View {
                 TextField("Bitte ein Namen Eingeben", text: $itemName)
                     .padding()
                     .background(Color.gray.opacity(0.2))
-                    
                     .cornerRadius(30)
                     .formStyle(.columns)
                 Button("Hinzufügen"){
@@ -28,14 +27,11 @@ struct TexFieldView: View {
                 .foregroundStyle(.white)
                 .background(.blue)
                 .clipShape(Capsule())
-                
             }
             Text(itemName2).foregroundStyle(.white)
         }
         .padding()
-        .background(.grayBackground)
     }
-    
 }
 
 #Preview {

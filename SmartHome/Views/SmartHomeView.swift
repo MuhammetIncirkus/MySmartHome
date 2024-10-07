@@ -17,28 +17,23 @@ struct SmartHomeView: View {
     var body: some View {
         VStack{
             HeaderView(smartHomeName: $smartHomeName)
-                .frame(maxHeight: 60)
+                .fixedSize(horizontal: false, vertical: true)
             VStack{
+                TexFieldView(itemName: $itemName, itemName2: $itemName2)
+                Spacer()
                 
-            
-            TexFieldView(itemName: $itemName, itemName2: $itemName2)
-            Spacer()
-            
-            if roomViewVisible{
-                RoomView(roomViewVisible: $roomViewVisible)
-            }
-            Spacer()
-            
+                if roomViewVisible{
+                    RoomView(roomViewVisible: $roomViewVisible)
+                }
+                Spacer()
             }
             .background(.grayBackground)
-            
             Toggle(
                 roomViewVisible ? "Raumvorschau anzeigen" : "Raumvorschau ausblenden",
                 isOn: $roomViewVisible
             )
             .padding()
             .foregroundStyle(.white)
-            
         }.background(.blueBackground)
     }
 }

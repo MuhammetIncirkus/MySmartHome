@@ -7,37 +7,9 @@
 
 import SwiftUI
 
-//struct RoomView: View {
-//    
-//    var image: String = "childroom"
-//    
-//    var body: some View {
-//        ZStack(alignment: .topTrailing){
-//            Image(image)
-//                .resizable()
-//                .scaledToFill()
-//                .cornerRadius(20)
-//                .frame(width: 320,height: 180)
-//                .padding()
-//                .shadow(radius: 10)
-//            Button {
-//                
-//            } label: {
-//                Image(systemName: "arrow.down.right.and.arrow.up.left")
-//                    .padding()
-//                    .foregroundStyle(.red)
-//                    
-//            }
-//
-//            
-//        }.frame(width: 320,height: 180)
-//
-//    }
-//}
-
 struct RoomView: View {
     
-    var image: String = "bath"
+    var image: String = "livingroom"
     @Binding var roomViewVisible: Bool
     
     var body: some View {
@@ -56,11 +28,11 @@ struct RoomView: View {
             }) {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.red)
-                    .background(Color.black.opacity(0.7))
+                    .background(.black)
                     .clipShape(Circle())
             }
             .padding([.top, .trailing], 30)
-        }.background(.grayBackground)
+        }
         
     }
 }
