@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		CE75F2232C8B1486001AD0A3 /* SmartHomeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75F2222C8B1486001AD0A3 /* SmartHomeApp.swift */; };
-		CE75F2252C8B1486001AD0A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75F2242C8B1486001AD0A3 /* ContentView.swift */; };
 		CE75F2272C8B1486001AD0A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F2262C8B1486001AD0A3 /* Assets.xcassets */; };
 		CE75F22A2C8B1486001AD0A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,10 +15,14 @@
 /* Begin PBXFileReference section */
 		CE75F21F2C8B1486001AD0A3 /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE75F2222C8B1486001AD0A3 /* SmartHomeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeApp.swift; sourceTree = "<group>"; };
-		CE75F2242C8B1486001AD0A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE75F2262C8B1486001AD0A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D3BEB5C52CB3DE0E003309DE /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
+		D3BEB5C62CB3DE16003309DE /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CE75F21C2C8B1486001AD0A3 /* Frameworks */ = {
@@ -51,8 +54,9 @@
 		CE75F2212C8B1486001AD0A3 /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				D3BEB5C62CB3DE16003309DE /* Views */,
+				D3BEB5C52CB3DE0E003309DE /* Models */,
 				CE75F2222C8B1486001AD0A3 /* SmartHomeApp.swift */,
-				CE75F2242C8B1486001AD0A3 /* ContentView.swift */,
 				CE75F2262C8B1486001AD0A3 /* Assets.xcassets */,
 				CE75F2282C8B1486001AD0A3 /* Preview Content */,
 			);
@@ -81,6 +85,10 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D3BEB5C52CB3DE0E003309DE /* Models */,
+				D3BEB5C62CB3DE16003309DE /* Views */,
 			);
 			name = SmartHome;
 			productName = SmartHome;
@@ -137,7 +145,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE75F2252C8B1486001AD0A3 /* ContentView.swift in Sources */,
 				CE75F2232C8B1486001AD0A3 /* SmartHomeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +279,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SmartHome/Preview Content\"";
+				DEVELOPMENT_TEAM = 9KWUTK4PE3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -300,6 +308,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SmartHome/Preview Content\"";
+				DEVELOPMENT_TEAM = 9KWUTK4PE3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
