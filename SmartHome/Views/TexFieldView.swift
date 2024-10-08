@@ -15,7 +15,12 @@ struct TexFieldView: View {
     var body: some View {
         VStack{
             HStack{
-                TextField("Bitte ein Namen Eingeben", text: $itemName)
+                TextField(
+                    "",
+                    text: $itemName,
+                    prompt: Text("Bitte ein Namen Eingeben")
+                        .foregroundStyle(.gray)
+                )
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(30)
