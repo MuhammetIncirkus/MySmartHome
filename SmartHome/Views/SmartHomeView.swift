@@ -11,8 +11,13 @@ struct SmartHomeView: View {
     
     @State var itemName = ""
     @State var itemName2 = ""
-    @State var roomViewVisible = true
+    @State var roomViewVisible = false
     @State var smartHomeName = "My Home"
+    @State var objects: [SmartDevice] = [
+        SmartDevice(name: "WohnzimmerLicht", room: .livingRoom, type: .light, isOn: true),
+        SmartDevice(name: "Heizung", room: .livingRoom, type: .thermostat, isOn: true, temperature: 22),
+        SmartDevice(name: "Haustür", room: .corridor, type: .lock, isLocked: false),
+    ]
     
     var body: some View {
         VStack{
