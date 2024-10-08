@@ -5,8 +5,8 @@
 //  Created by Muhammet Incirkus on 08.10.24.
 //
 
-enum DeviceType {
-    case light
-    case lock
-    case thermostat
+enum DeviceType: String {
+    case light = "Licht"
+    case lock = "Türschloss"
+    case thermostat = "Heizung"
 }

@@ -5,12 +5,12 @@
 //  Created by Muhammet Incirkus on 08.10.24.
 //
 
-enum Rooms  {
-    case kitchen
-    case livingRoom
-    case bedroom
-    case bathroom
-    case office
-    case childrenRoom
-    case corridor
+enum Rooms: String  {
+    case kitchen = "Küche"
+    case livingRoom = "Wohnzimmer"
+    case bedroom = "Schlafzimmer"
+    case bathroom = "Badezimmer"
+    case office = "Büro"
+    case childrenRoom = "Kinderzimmer"
+    case corridor = "Flur"
 }

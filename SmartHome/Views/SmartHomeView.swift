@@ -13,8 +13,9 @@ struct SmartHomeView: View {
     @State var itemName2 = ""
     @State var roomViewVisible = false
     @State var smartHomeName = "My Home"
+    
     @State var objects: [SmartDevice] = [
-        SmartDevice(name: "WohnzimmerLicht", room: .livingRoom, type: .light, isOn: true),
+        SmartDevice(name: "Wohnzimmerlicht", room: .livingRoom, type: .light, isOn: false),
         SmartDevice(name: "Heizung", room: .livingRoom, type: .thermostat, isOn: true, temperature: 22),
         SmartDevice(name: "Haustür", room: .corridor, type: .lock, isLocked: false),
     ]
@@ -23,13 +24,19 @@ struct SmartHomeView: View {
         VStack{
             HeaderView(smartHomeName: $smartHomeName)
                 .fixedSize(horizontal: false, vertical: true)
-            VStack{
+            ScrollView{
                 TexFieldView(itemName: $itemName, itemName2: $itemName2)
                 Spacer()
                 
                 if roomViewVisible{
                     RoomView(roomViewVisible: $roomViewVisible)
                 }
+                
+                ForEach(objects){ object in
+                    ElementView(toggle: true, object: object)
+                        .padding(.vertical, 25)
+                }
+                
                 Spacer()
             }
             .background(.grayBackground)
