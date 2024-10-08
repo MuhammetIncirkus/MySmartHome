@@ -84,24 +84,20 @@ struct ElementView: View {
                 VStack(alignment: .trailing){
                     switch object.type {
                     case .lock:
-//                        Image(systemName: object.isLocked ? "lock" : "lock.open")
-//                            .padding()
-//                            .contentShape(Circle())
-                        Image(systemName: "lock")
+                        Image(systemName: object.isLocked ? "lock" : "lock.open")
                             .padding()
                             .contentShape(Circle())
+
                     case .thermostat:
-                        Text(object.temperature?.description.lowercased() ?? "--").padding()
-//                        Image(systemName: "thermometer")
-//                            .padding()
-//                            .contentShape(Circle())
-                    case .light:
-//                        Image(systemName: object.isOn ? "lightbulb.max.fill" :"lightbulb")
-//                            .padding()
-//                            .contentShape(Circle())
-                        Image(systemName: "lightbulb.max.fill")
+
+                        Image(systemName: "thermometer")
                             .padding()
                             .contentShape(Circle())
+                    case .light:
+                        Image(systemName: object.isOn ? "lightbulb.max.fill" :"lightbulb")
+                            .padding()
+                            .contentShape(Circle())
+
                     }
                 }
             }

@@ -11,7 +11,7 @@ struct SmartDevice: Identifiable {
     let name: String
     let room: Rooms
     let type: DeviceType
-    var isOn: Bool?
-    var temperature: Double? = 20.0
-    var isLocked: Bool?
+    var isOn: Bool = false
+    var temperature: Double = 20.0
+    var isLocked: Bool = false
 }

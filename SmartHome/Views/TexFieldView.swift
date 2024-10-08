@@ -11,9 +11,24 @@ struct TexFieldView: View {
     
     @Binding var itemName: String
     @Binding var itemName2: String
+    @Binding var objects: [SmartDevice]
+//    @Binding var room: Rooms
+//    @Binding var deviceType: DeviceType
+    @State private var selectedDeviceType: DeviceType = .light
+    @State private var selectedRoom: Rooms = .livingRoom
     
     var body: some View {
         VStack{
+            HStack{
+                Text("Raum:").foregroundStyle(.white)
+                ChooseRoomPickerView(selectedRoom: $selectedRoom)
+                Spacer()
+                Text("Typ:").foregroundStyle(.white)
+                ChooseDeviceTypePickerView(selectedDeviceType: $selectedDeviceType)
+                
+                
+                    
+            }
             HStack{
                 TextField(
                     "",
@@ -26,19 +41,25 @@ struct TexFieldView: View {
                     .cornerRadius(30)
                     .formStyle(.columns)
                 Button("Hinzufügen"){
-                    itemName2 = itemName
+                    var smartDevice: SmartDevice = SmartDevice(
+                        name: itemName,
+                        room: selectedRoom,
+                        type: selectedDeviceType
+                    )
+                    objects.append(smartDevice)
                 }
                 .padding()
                 .foregroundStyle(.white)
                 .background(.blue)
                 .clipShape(Capsule())
             }
-            Text(itemName2).foregroundStyle(.white)
+            
+            
         }
         .padding()
     }
 }
 
-#Preview {
-    TexFieldView(itemName: .constant(""), itemName2: .constant(""))
-}
+//#Preview {
+//    TexFieldView(itemName: .constant(""), itemName2: .constant(""), objects: [SmartDevice] = [])
+//}

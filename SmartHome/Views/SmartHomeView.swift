@@ -25,7 +25,7 @@ struct SmartHomeView: View {
             HeaderView(smartHomeName: $smartHomeName)
                 .fixedSize(horizontal: false, vertical: true)
             ScrollView{
-                TexFieldView(itemName: $itemName, itemName2: $itemName2)
+                TexFieldView(itemName: $itemName, itemName2: $itemName2, objects: $objects)
                 Spacer()
                 
                 if roomViewVisible{
