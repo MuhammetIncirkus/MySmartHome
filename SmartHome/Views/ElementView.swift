@@ -61,7 +61,7 @@ struct ElementView: View {
                         .cornerRadius(20)
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal)
-                        
+                        .shadow(color: .blue ,radius: 5)
         }//.padding(.bottom)
     }
     

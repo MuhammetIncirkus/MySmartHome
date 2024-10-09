@@ -21,16 +21,15 @@ struct GridElementView: View {
             
                 switch object.type {
                 case .lock:
-                    Image(systemName: object.isLocked ? "lock" : "lock.open")
+                    Image(systemName: object.isLocked ? "door.left.hand.closed" : "door.left.hand.open")
                         .padding()
-                        .contentShape(Circle())
                         .font(.title)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(object.isLocked ? .red : .green)
                 case .thermostat:
                     HStack{
-                        Image(systemName: "thermometer")
+                        Image(systemName: "thermometer.medium")
                             .padding()
-                            .contentShape(Circle())
+                            .font(.title)
                             .foregroundStyle(.white)
                         Text(object.temperature.description + "°C")
                             .foregroundStyle(.white)
@@ -39,10 +38,10 @@ struct GridElementView: View {
                     }
                     
                 case .light:
-                    Image(systemName: object.isOn ? "lightbulb.max.fill" :"lightbulb")
+                    Image(systemName: object.isOn ? "lightbulb.min.fill" : "lightbulb")
                         .padding()
-                        .contentShape(Circle())
-                        .foregroundStyle(.white)
+                        .font(.title)
+                        .foregroundStyle(object.isOn ? .yellow : .white)
                 }
             Text(object.room.rawValue)
                 .foregroundStyle(.white)
@@ -55,6 +54,7 @@ struct GridElementView: View {
         .background(.blueBackground)
         .cornerRadius(20)
         .padding()
+        .shadow(color: .blue ,radius: 10)
     }
 }
 

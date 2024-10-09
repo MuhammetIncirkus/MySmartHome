@@ -31,6 +31,7 @@ struct RoomView: View {
                             Image(systemName: device.isOn ? "lightbulb.min.fill" : "lightbulb")
                                 .foregroundStyle(device.isOn ? .yellow : .white)
                                 .rotationEffect(.degrees(180))
+                                .font(.system(size: 25))
 //                                .onTapGesture {
 //                                    device.isOn.toggle()
 //                                }
@@ -50,7 +51,10 @@ struct RoomView: View {
                             HStack{
                                 Text(device.temperature.description + "°C")
                                     .foregroundStyle(.white)
-                                Image(systemName: "thermometer.medium").foregroundStyle(.white)
+                                    .font(.system(size: 25))
+                                Image(systemName: "thermometer.medium")
+                                    .foregroundStyle(.white)
+                                    .font(.system(size: 25))
                             }
                         }
                     }
@@ -66,6 +70,7 @@ struct RoomView: View {
                                 systemName: device.isLocked ? "door.left.hand.closed" : "door.left.hand.open"
                             )
                             .foregroundStyle(device.isLocked ? .red : .green)
+                            .font(.system(size: 25))
                         }
                     }
                     .padding(.bottom, 40)

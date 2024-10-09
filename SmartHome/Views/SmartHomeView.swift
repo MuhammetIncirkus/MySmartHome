@@ -15,27 +15,27 @@ struct SmartHomeView: View {
     @State var listView = true
     @State var smartHomeName = "My Home"
     
-//    @State var objects: [SmartDevice] = [
-//        SmartDevice(
-//            name: "Wohnzimmerlicht",
-//            room: .livingRoom,
-//            type: .light,
-//            isOn: true
-//        ),
-//        SmartDevice(
-//            name: "Heizung",
-//            room: .livingRoom,
-//            type: .thermostat,
-//            isOn: true,
-//            temperature: 22
-//        ),
-//        SmartDevice(
-//            name: "Wohnungstür",
-//            room: .corridor,
-//            type: .lock,
-//            isLocked: false
-//        )]
-        
+    //    @State var objects: [SmartDevice] = [
+    //        SmartDevice(
+    //            name: "Wohnzimmerlicht",
+    //            room: .livingRoom,
+    //            type: .light,
+    //            isOn: true
+    //        ),
+    //        SmartDevice(
+    //            name: "Heizung",
+    //            room: .livingRoom,
+    //            type: .thermostat,
+    //            isOn: true,
+    //            temperature: 22
+    //        ),
+    //        SmartDevice(
+    //            name: "Wohnungstür",
+    //            room: .corridor,
+    //            type: .lock,
+    //            isLocked: false
+    //        )]
+    
     
     @State var objects: [SmartDevice] = [
         SmartDevice(
@@ -128,7 +128,6 @@ struct SmartHomeView: View {
                 .fixedSize(horizontal: false, vertical: true)
             ScrollView{
                 TexFieldView(itemName: $itemName, objects: $objects)
-                //Spacer()
                 
                 if roomViewVisible{
                     RoomView(
@@ -143,7 +142,7 @@ struct SmartHomeView: View {
                                     toggle: true,
                                     objects: $objects, object: object
                                 )
-                                    .padding(.vertical, 25)
+                                .padding(.vertical, 25)
                             }
                         }.padding(.bottom, 25)
                     } else{
@@ -156,14 +155,10 @@ struct SmartHomeView: View {
                                 GridElementView(toggle: true, object: object)
                                 //.padding(.vertical, 25)
                             }
-                            
                         }
                     }
                 }
-                
-                //Spacer()
             }
-            //.padding(.bottom, 50)
             .background(.grayBackground)
             
             if !roomViewVisible{
@@ -183,8 +178,6 @@ struct SmartHomeView: View {
             .foregroundStyle(.white)
         }.background(.blueBackground)
     }
-    
-    
     
 }
 
