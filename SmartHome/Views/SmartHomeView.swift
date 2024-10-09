@@ -136,16 +136,8 @@ struct SmartHomeView: View {
                         objects: $objects
                     )
                 } else {
-                    
-                    
-                    
                     if listView {
-                        
-                        let columns = Array(
-                            repeating: GridItem(.flexible()),
-                            count: 1
-                        )
-                        LazyVGrid(columns: columns) {
+                        LazyVGrid(columns: [GridItem(.flexible())]) {
                             ForEach(objects){ object in
                                 ElementView(
                                     toggle: true,
@@ -153,14 +145,7 @@ struct SmartHomeView: View {
                                 )
                                     .padding(.vertical, 25)
                             }
-                            
-                        }
-                        
-                        //                    ForEach(objects){ object in
-                        //                        ElementView(toggle: true, object: object)
-                        //                            .padding(.vertical, 23)
-                        //                    }
-                        
+                        }.padding(.bottom, 25)
                     } else{
                         let columns = Array(
                             repeating: GridItem(.flexible()),
@@ -178,7 +163,7 @@ struct SmartHomeView: View {
                 
                 //Spacer()
             }
-            //.padding(.bottom)
+            //.padding(.bottom, 50)
             .background(.grayBackground)
             
             if !roomViewVisible{

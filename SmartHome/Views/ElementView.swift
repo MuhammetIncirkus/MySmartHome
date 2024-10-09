@@ -62,7 +62,7 @@ struct ElementView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal)
                         
-        }
+        }//.padding(.bottom)
     }
     
     

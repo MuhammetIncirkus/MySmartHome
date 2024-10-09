@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RoomView: View {
     
-    @State var image: String = "livingroom"
+    
     @Binding var roomViewVisible: Bool
     @Binding var objects: [SmartDevice]
     
@@ -18,6 +18,7 @@ struct RoomView: View {
             ForEach(Rooms.allCases) { room in
                 
                 let imageName = imageName(for: room)
+                //let imageName = "Room"
                 
                 VStack{
                     HStack{
@@ -46,11 +47,10 @@ struct RoomView: View {
                         }
 
                         ForEach(filteredDevices) { device in
-                            VStack{
-                                
-                                Text(device.temperature.description)
+                            HStack{
+                                Text(device.temperature.description + "°C")
                                     .foregroundStyle(.white)
-                            Image(systemName: "thermometer.medium").foregroundStyle(.white)
+                                Image(systemName: "thermometer.medium").foregroundStyle(.white)
                             }
                         }
                     }
@@ -71,7 +71,7 @@ struct RoomView: View {
                     .padding(.bottom, 40)
                     .padding(.horizontal)
                 }
-                .frame(width: 200, height: 355)
+                .frame(width: 355, height: 200)
                 .cornerRadius(20)
                 .padding()
                 .background(
@@ -79,7 +79,7 @@ struct RoomView: View {
                         Image(imageName)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 200, height: 355)
+                            .frame(width: 355, height: 200)
                             .clipped()
                             .background(.white)
                             .cornerRadius(20)
@@ -91,7 +91,7 @@ struct RoomView: View {
                             Text(room.rawValue)
                                 .fontWeight(.bold)
                                 .padding([.top, .leading], 30)
-                                .foregroundStyle(.black)
+                                .foregroundStyle(.white)
                             Spacer()
                         Button(action: {
                             roomViewVisible.toggle()
