@@ -10,10 +10,8 @@ import SwiftUI
 struct TexFieldView: View {
     
     @Binding var itemName: String
-    @Binding var itemName2: String
+//    @Binding var itemName2: String
     @Binding var objects: [SmartDevice]
-//    @Binding var room: Rooms
-//    @Binding var deviceType: DeviceType
     @State private var selectedDeviceType: DeviceType = .light
     @State private var selectedRoom: Rooms = .livingRoom
     
@@ -25,10 +23,7 @@ struct TexFieldView: View {
                 Spacer()
                 Text("Typ:").foregroundStyle(.white)
                 ChooseDeviceTypePickerView(selectedDeviceType: $selectedDeviceType)
-                
-                
-                    
-            }
+               }
             HStack{
                 TextField(
                     "",
@@ -41,7 +36,7 @@ struct TexFieldView: View {
                     .cornerRadius(30)
                     .formStyle(.columns)
                 Button("Hinzufügen"){
-                    var smartDevice: SmartDevice = SmartDevice(
+                    let smartDevice: SmartDevice = SmartDevice(
                         name: itemName,
                         room: selectedRoom,
                         type: selectedDeviceType
@@ -56,10 +51,14 @@ struct TexFieldView: View {
             
             
         }
-        .padding()
+        .padding(.horizontal)
+        //.background(.red)
     }
 }
 
-//#Preview {
-//    TexFieldView(itemName: .constant(""), itemName2: .constant(""), objects: [SmartDevice] = [])
-//}
+#Preview {
+    TexFieldView(
+        itemName: .constant(""),
+        objects: .constant([])
+        )
+}

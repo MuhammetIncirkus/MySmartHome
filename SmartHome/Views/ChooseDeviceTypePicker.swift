@@ -14,7 +14,7 @@ struct ChooseDeviceTypePickerView: View {
     var body: some View {
         Picker("Device Type", selection: $selectedDeviceType) {
             ForEach(DeviceType.allCases) { deviceType in
-                Text(deviceType.rawValue)
+                Text(deviceType.rawValue).tag(deviceType)
             }
         }
     }

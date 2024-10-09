@@ -14,7 +14,7 @@ struct ChooseRoomPickerView: View {
     var body: some View {
         Picker("Room", selection: $selectedRoom) {
             ForEach(Rooms.allCases) { room in
-                Text(room.rawValue)
+                Text(room.rawValue).tag(room)
             }
         }
     }
