@@ -33,7 +33,7 @@ struct SmartHomeView: View {
 //            name: "Wohnungstür",
 //            room: .corridor,
 //            type: .lock,
-//            isLocked: true
+//            isLocked: false
 //        )]
         
     
@@ -131,54 +131,65 @@ struct SmartHomeView: View {
                 //Spacer()
                 
                 if roomViewVisible{
-                    RoomView(roomViewVisible: $roomViewVisible)
-                }
-                
-                if listView {
-                    
-                    let columns = Array(
-                        repeating: GridItem(.flexible()),
-                        count: 1
+                    RoomView(
+                        roomViewVisible: $roomViewVisible,
+                        objects: $objects
                     )
-                    LazyVGrid(columns: columns) {
-                        ForEach(objects){ object in
-                            ElementView(toggle: true, object: object)
-                                .padding(.vertical, 25)
+                } else {
+                    
+                    
+                    
+                    if listView {
+                        
+                        let columns = Array(
+                            repeating: GridItem(.flexible()),
+                            count: 1
+                        )
+                        LazyVGrid(columns: columns) {
+                            ForEach(objects){ object in
+                                ElementView(
+                                    toggle: true,
+                                    objects: $objects, object: object
+                                )
+                                    .padding(.vertical, 25)
+                            }
+                            
                         }
                         
-                    }
-                    
-//                    ForEach(objects){ object in
-//                        ElementView(toggle: true, object: object)
-//                            .padding(.vertical, 23)
-//                    }
-                    
-                } else{
-                    let columns = Array(
-                        repeating: GridItem(.flexible()),
-                        count: 2
-                    )
-                    LazyVGrid(columns: columns) {
-                        ForEach(objects){ object in
-                            GridElementView(toggle: true, object: object)
+                        //                    ForEach(objects){ object in
+                        //                        ElementView(toggle: true, object: object)
+                        //                            .padding(.vertical, 23)
+                        //                    }
+                        
+                    } else{
+                        let columns = Array(
+                            repeating: GridItem(.flexible()),
+                            count: 2
+                        )
+                        LazyVGrid(columns: columns) {
+                            ForEach(objects){ object in
+                                GridElementView(toggle: true, object: object)
                                 //.padding(.vertical, 25)
+                            }
+                            
                         }
-                        
                     }
                 }
-                
                 
                 //Spacer()
             }
             //.padding(.bottom)
             .background(.grayBackground)
             
-            Toggle(
-                listView ? "Liste anzeigen" : "Raster anzeigen",
-                isOn: $listView
-            )
-            .padding(.horizontal, 25)
-            .foregroundStyle(.white)
+            if !roomViewVisible{
+                Toggle(
+                    listView ? "Liste anzeigen" : "Raster anzeigen",
+                    isOn: $listView
+                )
+                .padding(.horizontal, 25)
+                .foregroundStyle(.white)
+            }
+            
             Toggle(
                 roomViewVisible ? "Raumvorschau anzeigen" : "Raumvorschau ausblenden",
                 isOn: $roomViewVisible
@@ -187,6 +198,9 @@ struct SmartHomeView: View {
             .foregroundStyle(.white)
         }.background(.blueBackground)
     }
+    
+    
+    
 }
 
 #Preview {

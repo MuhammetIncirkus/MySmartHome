@@ -27,10 +27,17 @@ struct GridElementView: View {
                         .font(.title)
                         .foregroundStyle(.white)
                 case .thermostat:
-                    Image(systemName: "thermometer")
-                        .padding()
-                        .contentShape(Circle())
-                        .foregroundStyle(.white)
+                    HStack{
+                        Image(systemName: "thermometer")
+                            .padding()
+                            .contentShape(Circle())
+                            .foregroundStyle(.white)
+                        Text(object.temperature.description + "°C")
+                            .foregroundStyle(.white)
+                            .font(.subheadline)
+                            .fontWeight(.light)
+                    }
+                    
                 case .light:
                     Image(systemName: object.isOn ? "lightbulb.max.fill" :"lightbulb")
                         .padding()

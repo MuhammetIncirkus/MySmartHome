@@ -10,6 +10,7 @@ import SwiftUI
 struct ElementView: View {
     
     @State var toggle: Bool
+    @Binding var objects: [SmartDevice]
     var object: SmartDevice
     
     var body: some View {
@@ -19,17 +20,17 @@ struct ElementView: View {
                 VStack{
                     switch object.type {
                     case .lock:
-                        Image(systemName: "door.right.hand.closed")
+                        Image(systemName: object.isLocked ? "door.left.hand.closed" : "door.left.hand.open")
                             .padding()
-                            .contentShape(Circle())
+                            .foregroundStyle(object.isLocked ? .red : .green)
                     case .thermostat:
-                        Image(systemName: "thermometer")
+                        Image(systemName: "thermometer.medium")
                             .padding()
-                            .contentShape(Circle())
+                            .foregroundStyle(.white)
                     case .light:
-                        Image(systemName: "lightbulb")
+                        Image(systemName: object.isOn ? "lightbulb.min.fill" : "lightbulb")
                             .padding()
-                            .contentShape(Circle())
+                            .foregroundStyle(object.isOn ? .yellow : .white)
                     }
                     
                 }
@@ -45,19 +46,12 @@ struct ElementView: View {
                 Spacer()
                 
                 VStack(alignment: .center){
-                    switch object.type {
-                    case .lock:
-                        Image(systemName: object.isLocked ? "lock" : "lock.open")
+                    Button {
+                        removeObject(object: object)
+                    } label: {
+                        Image(systemName: "trash.fill")
                             .padding()
-                            .contentShape(Circle())
-                    case .thermostat:
-                        Image(systemName: "thermometer")
-                            .padding()
-                            .contentShape(Circle())
-                    case .light:
-                        Image(systemName: object.isOn ? "lightbulb.max.fill" : "lightbulb")
-                            .padding()
-                            .contentShape(Circle())
+                            .foregroundColor(.red)
                     }
                 }
             }
@@ -70,8 +64,31 @@ struct ElementView: View {
                         
         }
     }
+    
+    
+    func removeObject(object: SmartDevice){
+        objects.removeAll { SmartDevice in
+            SmartDevice.id == object.id
+        }
+        
+    }
+    
 }
 
 #Preview {
-    ElementView(toggle: .random(), object: SmartDevice(name: "String", room: Rooms.livingRoom, type: DeviceType.lock, isLocked: true) )
+    ElementView(
+        toggle: .random(),
+        objects: .constant([SmartDevice(
+            name: "String",
+            room: Rooms.livingRoom,
+            type: DeviceType.lock,
+            isLocked: true
+        )]),
+        object: SmartDevice(
+            name: "String",
+            room: Rooms.livingRoom,
+            type: DeviceType.lock,
+            isLocked: true
+        )
+    )
 }
