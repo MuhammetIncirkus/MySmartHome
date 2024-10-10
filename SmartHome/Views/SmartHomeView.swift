@@ -12,7 +12,7 @@ struct SmartHomeView: View {
     @State var itemName = ""
     @State var itemName2 = ""
     @State var roomViewVisible = false
-    @State var listView = false
+    @State var listView = true
     @State var smartHomeName = "My Home"
     
     
@@ -46,7 +46,31 @@ struct SmartHomeView: View {
             isOn: true
         ),
         SmartDevice(
+            name: "Fernseher",
+            room: .livingRoom,
+            type: .light,
+            isOn: true
+        ),
+        SmartDevice(
+            name: "Ambiente",
+            room: .livingRoom,
+            type: .light,
+            isOn: true
+        ),
+        SmartDevice(
             name: "Küchenlicht",
+            room: .kitchen,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Arbeitsplatte",
+            room: .kitchen,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Dunstabzug",
             room: .kitchen,
             type: .light,
             isOn: false
@@ -64,8 +88,71 @@ struct SmartHomeView: View {
             isOn: false
         ),
         SmartDevice(
+            name: "Nachtlicht-Links",
+            room: .bedroom,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Nachtlicht-Rechts",
+            room: .bedroom,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Bürolicht",
+            room: .office,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Schreibtisch",
+            room: .office,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Kinderzimmer",
+            room: .childrenRoom,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Nachtlicht",
+            room: .childrenRoom,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Flurlicht",
+            room: .corridor,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
             name: "Heizung",
             room: .livingRoom,
+            type: .thermostat,
+            isOn: true,
+            temperature: 22
+        ),
+        SmartDevice(
+            name: "Heizung",
+            room: .kitchen,
+            type: .thermostat,
+            isOn: true,
+            temperature: 22
+        ),
+        SmartDevice(
+            name: "Heizung",
+            room: .bathroom,
+            type: .thermostat,
+            isOn: true,
+            temperature: 22
+        ),
+        SmartDevice(
+            name: "Heizung",
+            room: .corridor,
             type: .thermostat,
             isOn: true,
             temperature: 22
@@ -118,6 +205,18 @@ struct SmartHomeView: View {
         SmartDevice(
             name: "Bürotür",
             room: .office,
+            type: .lock,
+            isLocked: true
+        ),
+        SmartDevice(
+            name: "Schlafzimmertür",
+            room: .bedroom,
+            type: .lock,
+            isLocked: true
+        ),
+        SmartDevice(
+            name: "Küchentür",
+            room: .kitchen,
             type: .lock,
             isLocked: true
         ),

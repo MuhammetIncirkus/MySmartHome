@@ -23,6 +23,7 @@ struct ElementView: View {
                         Image(systemName: object.isLocked ? "door.left.hand.closed" : "door.left.hand.open")
                             .padding()
                             .foregroundStyle(object.isLocked ? .red : .green)
+                            .contentTransition(.symbolEffect(.replace.offUp))
                     case .thermostat:
                         Image(systemName: "thermometer.medium")
                             .padding()
@@ -31,6 +32,7 @@ struct ElementView: View {
                         Image(systemName: object.isOn ? "lightbulb.min.fill" : "lightbulb")
                             .padding()
                             .foregroundStyle(object.isOn ? .yellow : .white)
+                            .contentTransition(.symbolEffect(.replace.offUp))
                     }
                     
                 }
@@ -53,6 +55,7 @@ struct ElementView: View {
                         Button(object.isLocked ? "unlock" : "lock") {
                             object.isLocked.toggle()
                         }.buttonStyle(.borderedProminent)
+                            .contentTransition(.symbolEffect(.replace.offUp))
                     case .thermostat:
                         Slider(
                             value: $object.temperature, in: 15...30, step: 0.5) {
@@ -85,7 +88,7 @@ struct ElementView: View {
                 }
             }
             //.fixedSize(horizontal: false, vertical: true)
-                        .frame(width: geometry.size.width * 0.9)
+            .frame(width: geometry.size.width * 0.9, height: 60)
                         .background(.blueBackground)
                         .cornerRadius(20)
                         .frame(maxWidth: .infinity)
@@ -116,8 +119,8 @@ struct ElementView: View {
         object: .constant(SmartDevice(
             name: "String",
             room: Rooms.livingRoom,
-            type: DeviceType.thermostat,
-            isOn: true,
+            type: DeviceType.light,
+            isOn: false,
             temperature: 20.0,
             isLocked: false
         ))

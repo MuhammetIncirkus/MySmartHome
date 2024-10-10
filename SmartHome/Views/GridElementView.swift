@@ -25,6 +25,7 @@ struct GridElementView: View {
                         .padding()
                         .font(.title)
                         .foregroundStyle(object.isLocked ? .red : .green)
+                        .contentTransition(.symbolEffect(.replace.offUp))
                         .onTapGesture{
                             object.isLocked.toggle()
                         }
@@ -44,6 +45,7 @@ struct GridElementView: View {
                         .padding()
                         .font(.title)
                         .foregroundStyle(object.isOn ? .yellow : .white)
+                        .contentTransition(.symbolEffect(.replace.offUp))
                         .onTapGesture{
                             object.isOn.toggle()
                         }

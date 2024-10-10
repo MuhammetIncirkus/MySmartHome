@@ -15,70 +15,80 @@ struct RoomView: View {
     var body: some View {
         ScrollView{
             ForEach(Rooms.allCases, id: \.id) { room in
-                
+
                 let imageName = imageName(for: room)
                 //let imageName = "Room"
-                
-                VStack{
-                    HStack{
+                HStack{
+                    
+                    VStack{
                         ForEach($objects) { $device in
-                            if(
-                                $device.wrappedValue.room == room && $device.wrappedValue
-                                    .type == .light){
-                                Image(systemName: $device.wrappedValue.isOn ? "lightbulb.min.fill" : "lightbulb")
-                                    .foregroundStyle($device.wrappedValue.isOn ? .yellow : .white)
-                                    .rotationEffect(.degrees(180))
-                                    .font(.system(size: 25))
-                                    .onTapGesture {
-                                        $device.wrappedValue.isOn.toggle()
-                                    }
-                            }
-                        }
-
-                    }
-                    .padding(.top, 40)
-                    .padding(.horizontal)
-                    Spacer()
-                    HStack{ForEach($objects) { $device in
                             if(
                                 $device.wrappedValue.room == room && $device.wrappedValue
                                     .type == .thermostat){
+                                let gradient = Gradient(colors: [.blue, .green, .yellow, .orange, .red])
                                 Gauge(
                                     value: $device.wrappedValue.temperature,
-                                    in: 15...10) {
-                                        Text("Temperatur")
+                                    in: 15.0...30.0) {
+                                        Text("🌡️")
+                                    } currentValueLabel: {
+                                        Text (
+                                            $device.wrappedValue.temperature.description
+                                        ).foregroundStyle(.white)
+                                    } minimumValueLabel: {
+                                        Text ("15").foregroundStyle(.white)
                                     }
-//                                HStack{
-//                                    Text($device.wrappedValue.temperature.description + "°C")
-//                                        .foregroundStyle(.white)
-//                                        .font(.system(size: 25))
-//                                    Image(systemName: "thermometer.medium")
-//                                        .foregroundStyle(.white)
-//                                        .font(.system(size: 25))
-//                                    Stepper("🌡️", value: $device.wrappedValue.temperature)
-//                                }
+                                maximumValueLabel: {
+                                    Text ("30").foregroundStyle(.white)
+                                }
+                                .gaugeStyle(.accessoryCircular)
+                                .tint(gradient)
+                                
                             }
                         }
                     }
+                    .padding(.leading, 30)
                     Spacer()
-                    HStack{
-                        ForEach($objects) { $device in
-                            if(
-                                $device.wrappedValue.room == room && $device.wrappedValue
-                                    .type == .lock){
-                                Image(
-                                    systemName: $device.wrappedValue.isLocked ? "door.left.hand.closed" : "door.left.hand.open"
-                                )
-                                .foregroundStyle($device.wrappedValue.isLocked ? .red : .green)
-                                .font(.system(size: 25))
-                                .onTapGesture {
-                                    $device.wrappedValue.isLocked.toggle()
+                    VStack{
+                        HStack{
+                            ForEach($objects) { $device in
+                                if(
+                                    $device.wrappedValue.room == room && $device.wrappedValue
+                                        .type == .light){
+                                    Image(systemName: $device.wrappedValue.isOn ? "lightbulb.min.fill" : "lightbulb")
+                                        .foregroundStyle($device.wrappedValue.isOn ? .yellow : .white)
+                                        .rotationEffect(.degrees(180))
+                                        .font(.system(size: 25))
+                                        .onTapGesture {
+                                            $device.wrappedValue.isOn.toggle()
+                                        }
+                                }
+                            }
+                            
+                        }
+                        .padding(.top, 40)
+                        .padding(.horizontal)
+                        Spacer()
+                        
+                        HStack{
+                            ForEach($objects) { $device in
+                                if(
+                                    $device.wrappedValue.room == room && $device.wrappedValue
+                                        .type == .lock){
+                                    Image(
+                                        systemName: $device.wrappedValue.isLocked ? "door.left.hand.closed" : "door.left.hand.open"
+                                    )
+                                    .foregroundStyle($device.wrappedValue.isLocked ? .red : .green)
+                                    .font(.system(size: 25))
+                                    .onTapGesture {
+                                        $device.wrappedValue.isLocked.toggle()
+                                    }
                                 }
                             }
                         }
+                        .padding(.bottom, 40)
+                        .padding(.horizontal)
                     }
-                    .padding(.bottom, 40)
-                    .padding(.horizontal)
+                    Spacer()
                 }
                 .frame(width: 355, height: 200)
                 .cornerRadius(20)
@@ -102,15 +112,15 @@ struct RoomView: View {
                                 .padding([.top, .leading], 30)
                                 .foregroundStyle(.white)
                             Spacer()
-                        Button(action: {
-                            roomViewVisible.toggle()
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.red)
-                                .background(.black)
-                                .clipShape(Circle())
-                        }
-                        .padding([.top, .trailing], 30)
+                            Button(action: {
+                                roomViewVisible.toggle()
+                            }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.red)
+                                    .background(.black)
+                                    .clipShape(Circle())
+                            }
+                            .padding([.top, .trailing], 30)
                         }
                     }
                 )
