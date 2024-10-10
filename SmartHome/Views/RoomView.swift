@@ -21,57 +21,60 @@ struct RoomView: View {
                 
                 VStack{
                     HStack{
-                        
-                        let filteredDevices = objects.filter {
-                            $0.room == room && $0.type == .light
-                        }
-
-                        ForEach($objects.filter {
-                            $0.room == room && $0.type == .light
-                        }) { $device in
-                            Image(systemName: device.isOn ? "lightbulb.min.fill" : "lightbulb")
-                                .foregroundStyle(device.isOn ? .yellow : .white)
-                                .rotationEffect(.degrees(180))
-                                .font(.system(size: 25))
-                                .onTapGesture {
-                                    device.isOn.toggle()
-                                }
+                        ForEach($objects) { $device in
+                            if(
+                                $device.wrappedValue.room == room && $device.wrappedValue
+                                    .type == .light){
+                                Image(systemName: $device.wrappedValue.isOn ? "lightbulb.min.fill" : "lightbulb")
+                                    .foregroundStyle($device.wrappedValue.isOn ? .yellow : .white)
+                                    .rotationEffect(.degrees(180))
+                                    .font(.system(size: 25))
+                                    .onTapGesture {
+                                        $device.wrappedValue.isOn.toggle()
+                                    }
+                            }
                         }
 
                     }
                     .padding(.top, 40)
                     .padding(.horizontal)
                     Spacer()
-                    HStack{
-                        
-                        let filteredDevices = objects.filter {
-                            $0.room == room && $0.type == .thermostat
-                        }
-
-                        ForEach(filteredDevices) { device in
-                            HStack{
-                                Text(device.temperature.description + "°C")
-                                    .foregroundStyle(.white)
-                                    .font(.system(size: 25))
-                                Image(systemName: "thermometer.medium")
-                                    .foregroundStyle(.white)
-                                    .font(.system(size: 25))
+                    HStack{ForEach($objects) { $device in
+                            if(
+                                $device.wrappedValue.room == room && $device.wrappedValue
+                                    .type == .thermostat){
+                                Gauge(
+                                    value: $device.wrappedValue.temperature,
+                                    in: 15...10) {
+                                        Text("Temperatur")
+                                    }
+//                                HStack{
+//                                    Text($device.wrappedValue.temperature.description + "°C")
+//                                        .foregroundStyle(.white)
+//                                        .font(.system(size: 25))
+//                                    Image(systemName: "thermometer.medium")
+//                                        .foregroundStyle(.white)
+//                                        .font(.system(size: 25))
+//                                    Stepper("🌡️", value: $device.wrappedValue.temperature)
+//                                }
                             }
                         }
                     }
                     Spacer()
                     HStack{
-                        
-                        let filteredDevices = objects.filter {
-                            $0.room == room && $0.type == .lock
-                        }
-
-                        ForEach(filteredDevices) { device in
-                            Image(
-                                systemName: device.isLocked ? "door.left.hand.closed" : "door.left.hand.open"
-                            )
-                            .foregroundStyle(device.isLocked ? .red : .green)
-                            .font(.system(size: 25))
+                        ForEach($objects) { $device in
+                            if(
+                                $device.wrappedValue.room == room && $device.wrappedValue
+                                    .type == .lock){
+                                Image(
+                                    systemName: $device.wrappedValue.isLocked ? "door.left.hand.closed" : "door.left.hand.open"
+                                )
+                                .foregroundStyle($device.wrappedValue.isLocked ? .red : .green)
+                                .font(.system(size: 25))
+                                .onTapGesture {
+                                    $device.wrappedValue.isLocked.toggle()
+                                }
+                            }
                         }
                     }
                     .padding(.bottom, 40)
