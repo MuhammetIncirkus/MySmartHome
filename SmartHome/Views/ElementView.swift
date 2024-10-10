@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ElementView: View {
     
-    @State var toggle: Bool
+//    @State var toggle: Bool
     @Binding var objects: [SmartDevice]
-    var object: SmartDevice
+    @Binding var object: SmartDevice
     
     var body: some View {
         GeometryReader { geometry in
@@ -35,7 +35,9 @@ struct ElementView: View {
                     
                 }
                 VStack(alignment: .leading){
-                    Text(object.name)
+                    Text(
+                        object.type.rawValue == "🌡️ - Heizung" ?  object.temperature.description + " °C" : object.name
+                    )
                         .font(.headline)
                         .foregroundColor(.white)
                     Text(object.room.rawValue)
@@ -44,6 +46,33 @@ struct ElementView: View {
                 }
                 
                 Spacer()
+                
+                VStack{
+                    switch object.type {
+                    case .lock:
+                        Button(object.isLocked ? "unlock" : "lock") {
+                            object.isLocked.toggle()
+                        }.buttonStyle(.borderedProminent)
+                    case .thermostat:
+                        Slider(
+                            value: $object.temperature, in: 15...30, step: 0.5) {
+                                EmptyView()
+                            } minimumValueLabel: {
+                                Text("15")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                            } maximumValueLabel: {
+                                Text("30")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                            }
+
+                    case .light:
+                        Toggle(object.isOn ? "" : "", isOn: $object.isOn)
+                            .frame(width: 40)
+                    }
+                    
+                }
                 
                 VStack(alignment: .center){
                     Button {
@@ -77,18 +106,20 @@ struct ElementView: View {
 
 #Preview {
     ElementView(
-        toggle: .random(),
+        
         objects: .constant([SmartDevice(
             name: "String",
             room: Rooms.livingRoom,
             type: DeviceType.lock,
             isLocked: true
         )]),
-        object: SmartDevice(
+        object: .constant(SmartDevice(
             name: "String",
             room: Rooms.livingRoom,
-            type: DeviceType.lock,
-            isLocked: true
-        )
+            type: DeviceType.thermostat,
+            isOn: true,
+            temperature: 20.0,
+            isLocked: false
+        ))
     )
 }

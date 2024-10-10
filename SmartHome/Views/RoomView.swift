@@ -9,13 +9,12 @@ import SwiftUI
 
 struct RoomView: View {
     
-    
     @Binding var roomViewVisible: Bool
     @Binding var objects: [SmartDevice]
     
     var body: some View {
         ScrollView{
-            ForEach(Rooms.allCases) { room in
+            ForEach(Rooms.allCases, id: \.id) { room in
                 
                 let imageName = imageName(for: room)
                 //let imageName = "Room"
@@ -27,14 +26,16 @@ struct RoomView: View {
                             $0.room == room && $0.type == .light
                         }
 
-                        ForEach(filteredDevices) { device in
+                        ForEach($objects.filter {
+                            $0.room == room && $0.type == .light
+                        }) { $device in
                             Image(systemName: device.isOn ? "lightbulb.min.fill" : "lightbulb")
                                 .foregroundStyle(device.isOn ? .yellow : .white)
                                 .rotationEffect(.degrees(180))
                                 .font(.system(size: 25))
-//                                .onTapGesture {
-//                                    device.isOn.toggle()
-//                                }
+                                .onTapGesture {
+                                    device.isOn.toggle()
+                                }
                         }
 
                     }
@@ -138,5 +139,88 @@ struct RoomView: View {
 
 
 #Preview {
-    RoomView(roomViewVisible: .constant(true),objects: .constant([]))
+    RoomView(roomViewVisible: .constant(true), objects: .constant([
+        SmartDevice(
+            name: "Wohnzimmerlicht",
+            room: .livingRoom,
+            type: .light,
+            isOn: true
+        ),
+        SmartDevice(
+            name: "Küchenlicht",
+            room: .kitchen,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Badezimmerlicht",
+            room: .bathroom,
+            type: .light,
+            isOn: true
+        ),
+        SmartDevice(
+            name: "Schlafzimmerlicht",
+            room: .bedroom,
+            type: .light,
+            isOn: false
+        ),
+        SmartDevice(
+            name: "Heizung",
+            room: .livingRoom,
+            type: .thermostat,
+            isOn: true,
+            temperature: 22
+        ),
+        SmartDevice(
+            name: "Heizung",
+            room: .bedroom,
+            type: .thermostat,
+            isOn: true,
+            temperature: 18
+        ),
+        SmartDevice(
+            name: "Heizung",
+            room: .office,
+            type: .thermostat,
+            isOn: true,
+            temperature: 20
+        ),
+        SmartDevice(
+            name: "Heizung",
+            room: .childrenRoom,
+            type: .thermostat,
+            isOn: true,
+            temperature: 22
+        ),
+        SmartDevice(
+            name: "Wohnungstür",
+            room: .corridor,
+            type: .lock,
+            isLocked: true
+        ),
+        SmartDevice(
+            name: "Wohnzimmertür",
+            room: .livingRoom,
+            type: .lock,
+            isLocked: false
+        ),
+        SmartDevice(
+            name: "Badezimmertür",
+            room: .bathroom,
+            type: .lock,
+            isLocked: true
+        ),
+        SmartDevice(
+            name: "Kinderzimmertür",
+            room: .childrenRoom,
+            type: .lock,
+            isLocked: false
+        ),
+        SmartDevice(
+            name: "Bürotür",
+            room: .office,
+            type: .lock,
+            isLocked: true
+        ),
+    ]))
 }

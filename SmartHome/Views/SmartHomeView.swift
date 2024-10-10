@@ -12,8 +12,9 @@ struct SmartHomeView: View {
     @State var itemName = ""
     @State var itemName2 = ""
     @State var roomViewVisible = false
-    @State var listView = true
+    @State var listView = false
     @State var smartHomeName = "My Home"
+    
     
     //    @State var objects: [SmartDevice] = [
     //        SmartDevice(
@@ -35,8 +36,8 @@ struct SmartHomeView: View {
     //            type: .lock,
     //            isLocked: false
     //        )]
-    
-    
+
+
     @State var objects: [SmartDevice] = [
         SmartDevice(
             name: "Wohnzimmerlicht",
@@ -122,6 +123,7 @@ struct SmartHomeView: View {
         ),
     ]
     
+    
     var body: some View {
         VStack{
             HeaderView(smartHomeName: $smartHomeName)
@@ -137,10 +139,9 @@ struct SmartHomeView: View {
                 } else {
                     if listView {
                         LazyVGrid(columns: [GridItem(.flexible())]) {
-                            ForEach(objects){ object in
+                            ForEach($objects){ $object in
                                 ElementView(
-                                    toggle: true,
-                                    objects: $objects, object: object
+                                    objects: $objects, object: $object
                                 )
                                 .padding(.vertical, 25)
                             }
@@ -151,8 +152,8 @@ struct SmartHomeView: View {
                             count: 2
                         )
                         LazyVGrid(columns: columns) {
-                            ForEach(objects){ object in
-                                GridElementView(toggle: true, object: object)
+                            ForEach($objects){ $object in
+                                GridElementView(object: $object)
                                 //.padding(.vertical, 25)
                             }
                         }

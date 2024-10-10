@@ -9,12 +9,12 @@ import SwiftUI
 
 struct GridElementView: View {
     
-    @State var toggle: Bool
-    var object: SmartDevice
+//    @State var toggle: Bool
+    @Binding var object: SmartDevice
     
     var body: some View {
         VStack{
-            Text(object.name)
+            Text(object.type.rawValue == "🌡️ - Heizung" ?  object.temperature.description + " °C" : object.name)
                 .foregroundStyle(.white)
                 .font(.subheadline)
                 .fontWeight(.light)
@@ -25,16 +25,18 @@ struct GridElementView: View {
                         .padding()
                         .font(.title)
                         .foregroundStyle(object.isLocked ? .red : .green)
+                        .onTapGesture{
+                            object.isLocked.toggle()
+                        }
                 case .thermostat:
                     HStack{
-                        Image(systemName: "thermometer.medium")
-                            .padding()
-                            .font(.title)
-                            .foregroundStyle(.white)
-                        Text(object.temperature.description + "°C")
-                            .foregroundStyle(.white)
-                            .font(.subheadline)
-                            .fontWeight(.light)
+                        Stepper(
+                            "🌡️",
+                            value: $object.temperature,
+                            in: 15...30,
+                            step: 0.5
+                        )
+
                     }
                     
                 case .light:
@@ -42,6 +44,9 @@ struct GridElementView: View {
                         .padding()
                         .font(.title)
                         .foregroundStyle(object.isOn ? .yellow : .white)
+                        .onTapGesture{
+                            object.isOn.toggle()
+                        }
                 }
             Text(object.room.rawValue)
                 .foregroundStyle(.white)
@@ -59,5 +64,14 @@ struct GridElementView: View {
 }
 
 #Preview {
-    GridElementView(toggle: .random(), object: SmartDevice(name: "String", room: Rooms.livingRoom, type: DeviceType.lock, isLocked: true) )
+    GridElementView(object: .constant(SmartDevice(
+        name: "String",
+        room: Rooms.livingRoom,
+        type: DeviceType.thermostat,
+        isOn: true,
+        temperature: 20.0,
+        isLocked: false
+    )) )
+    
+    
 }

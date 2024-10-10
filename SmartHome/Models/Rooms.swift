@@ -25,5 +25,5 @@ enum Rooms: String, CaseIterable, Identifiable  {
     case childrenRoom = "Kinderzimmer"
     case corridor = "Flur"
     
-    var id: Self { self }
+    var id: String { rawValue }
 }
