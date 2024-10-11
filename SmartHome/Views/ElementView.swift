@@ -33,6 +33,17 @@ struct ElementView: View {
                             .padding()
                             .foregroundStyle(object.isOn ? .yellow : .white)
                             .contentTransition(.symbolEffect(.replace.offUp))
+                    case .power:
+                        Image(systemName: "powerplug.portrait.fill")
+                            .padding()
+                            .foregroundStyle(object.isOn ? .green : .red)
+                            .contentTransition(.symbolEffect(.replace.offUp))
+                            .opacity(0.8)
+                    case .sensor:
+                        Image(systemName: object.motion ? "sensor.fill" : "sensor")
+                            .padding()
+                            .foregroundStyle(object.motion ? .blue : .white)
+                            .contentTransition(.symbolEffect(.replace.offUp))
                     }
                     
                 }
@@ -66,21 +77,25 @@ struct ElementView: View {
 
                     case .thermostat:
                         Slider(
-                            value: $object.temperature, in: 15...30, step: 0.5) {
-                                EmptyView()
-                            } minimumValueLabel: {
-                                Text("15")
-                                    .font(.subheadline)
-                                    .foregroundColor(.white)
-                            } maximumValueLabel: {
-                                Text("30")
-                                    .font(.subheadline)
-                                    .foregroundColor(.white)
-                            }
+                            value: $object.temperature, in: 15...30, step: 0.5)
+                        .frame(maxWidth: 150)
 
                     case .light:
                         Toggle(object.isOn ? "" : "", isOn: $object.isOn)
                             .frame(width: 40)
+                            .padding(.trailing, 12)
+                        
+                    case .power:
+                        Toggle(object.isOn ? "" : "", isOn: $object.isOn)
+                            .frame(width: 40)
+                            .padding(.trailing, 12)
+                    case .sensor:
+                        Image(
+                            systemName: object.motion ? "sensor.fill" : "sensor"
+                        )
+                            .padding()
+                            .foregroundStyle(object.motion ? .blue : .white)
+                            .contentTransition(.symbolEffect(.replace.offUp))
                     }
                     
                 }
@@ -127,10 +142,11 @@ struct ElementView: View {
         object: .constant(SmartDevice(
             name: "String",
             room: Rooms.livingRoom,
-            type: DeviceType.lock,
+            type: DeviceType.sensor,
             isOn: false,
             temperature: 20.0,
-            isLocked: false
+            isLocked: false,
+            motion: true
         ))
     )
 }

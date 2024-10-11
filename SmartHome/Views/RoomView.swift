@@ -16,7 +16,7 @@ struct RoomView: View {
     var body: some View {
         ScrollView{
             ForEach(Rooms.allCases, id: \.id) { room in
-
+                
                 let imageName = imageName(for: room)
                 //let imageName = "Room"
                 HStack{
@@ -87,6 +87,22 @@ struct RoomView: View {
                             ForEach($objects) { $device in
                                 if(
                                     $device.wrappedValue.room == room && $device.wrappedValue
+                                        .type == .power){
+                                    Image(systemName: "powerplug.portrait.fill")
+                                        .foregroundStyle($device.wrappedValue.isOn ? .green : .red)
+                                        .font(.system(size: 25))
+                                        .onTapGesture {
+                                            $device.wrappedValue.isOn.toggle()
+                                        }
+                                }
+                            }
+                            
+                        }.padding(.horizontal)
+                        Spacer()
+                        HStack{
+                            ForEach($objects) { $device in
+                                if(
+                                    $device.wrappedValue.room == room && $device.wrappedValue
                                         .type == .lock){
                                     Image(
                                         systemName: $device.wrappedValue.isLocked ? "door.left.hand.closed" : "door.left.hand.open"
@@ -126,15 +142,6 @@ struct RoomView: View {
                                 .padding([.top, .leading], 30)
                                 .foregroundStyle(.white)
                             Spacer()
-//                            Button(action: {
-//                                roomViewVisible.toggle()
-//                            }) {
-//                                Image(systemName: "xmark.circle.fill")
-//                                    .foregroundColor(.red)
-//                                    .background(.black)
-//                                    .clipShape(Circle())
-//                            }
-//                            .padding([.top, .trailing], 30)
                         }
                     }
                 )
@@ -143,23 +150,23 @@ struct RoomView: View {
     
     
     func imageName(for room: Rooms) -> String {
-            switch room {
-            case .kitchen:
-                return "kitchen"
-            case .livingRoom:
-                return "livingroom"
-            case .bedroom:
-                return "bedroom"
-            case .bathroom:
-                return "bath"
-            case .office:
-                return "office"
-            case .childrenRoom:
-                return "childroom"
-            case .corridor:
-                return "corridor"
-            }
+        switch room {
+        case .kitchen:
+            return "kitchen"
+        case .livingRoom:
+            return "livingroom"
+        case .bedroom:
+            return "bedroom"
+        case .bathroom:
+            return "bath"
+        case .office:
+            return "office"
+        case .childrenRoom:
+            return "childroom"
+        case .corridor:
+            return "corridor"
         }
+    }
     
     
 }

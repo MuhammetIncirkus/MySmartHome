@@ -14,4 +14,5 @@ struct SmartDevice: Identifiable {
     var isOn: Bool = false
     var temperature: Double = 20.0
     var isLocked: Bool = false
+    var motion: Bool = false
 }

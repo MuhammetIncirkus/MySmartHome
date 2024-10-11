@@ -53,6 +53,23 @@ struct GridElementView: View {
                         .onTapGesture{
                             object.isOn.toggle()
                         }
+                case .power:
+                    Image(systemName: object.isOn ? "powerplug.fill" : "powerplug")
+                        .padding()
+                        .font(.title)
+                        .foregroundStyle(object.isOn ? .green : .red)
+                        .frame(height: 56)
+                        .contentTransition(.symbolEffect(.replace.offUp))
+                        .onTapGesture{
+                            object.isOn.toggle()
+                        }
+                case .sensor:
+                    Image(systemName: object.motion ? "sensor.fill" : "sensor")
+                        .padding()
+                        .font(.title)
+                        .foregroundStyle(object.motion ? .blue : .white)
+                        .contentTransition(.symbolEffect(.replace.offUp))
+                    
                 }
             Text(object.room.rawValue)
                 .foregroundStyle(.white)
@@ -73,10 +90,11 @@ struct GridElementView: View {
     GridElementView(object: .constant(SmartDevice(
         name: "String",
         room: Rooms.livingRoom,
-        type: DeviceType.thermostat,
+        type: DeviceType.sensor,
         isOn: true,
         temperature: 20.0,
-        isLocked: false
+        isLocked: false,
+        motion: true
     )) )
     
     

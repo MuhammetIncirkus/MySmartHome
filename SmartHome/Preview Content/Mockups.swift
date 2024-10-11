@@ -188,4 +188,22 @@ var mockup_objects: [SmartDevice] = [
         type: .lock,
         isLocked: true
     ),
+    SmartDevice(
+        name: "Fernseher",
+        room: .livingRoom,
+        type: .power,
+        isOn: true
+    ),
+    SmartDevice(
+        name: "Wohnzimmer",
+        room: .livingRoom,
+        type: .sensor,
+        motion: true
+    ),
+    SmartDevice(
+        name: "Bad",
+        room: .bathroom,
+        type: .sensor,
+        motion: false
+    ),
 ]
