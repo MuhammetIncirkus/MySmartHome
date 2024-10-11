@@ -52,6 +52,7 @@ struct TexFieldView: View {
             
         }
         .padding(.horizontal)
+        .padding(.top, 4)
         //.background(.red)
     }
 }

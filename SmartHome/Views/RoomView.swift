@@ -11,6 +11,7 @@ struct RoomView: View {
     
     @Binding var roomViewVisible: Bool
     @Binding var objects: [SmartDevice]
+    let gradient = Gradient(colors: [.blue, .green, .yellow, .orange, .red])
     
     var body: some View {
         ScrollView{
@@ -21,15 +22,17 @@ struct RoomView: View {
                 HStack{
                     
                     VStack{
+                        Spacer()
                         ForEach($objects) { $device in
                             if(
                                 $device.wrappedValue.room == room && $device.wrappedValue
                                     .type == .thermostat){
-                                let gradient = Gradient(colors: [.blue, .green, .yellow, .orange, .red])
+                                
+                                
                                 Gauge(
                                     value: $device.wrappedValue.temperature,
                                     in: 15.0...30.0) {
-                                        Text("🌡️")
+                                        Text("")
                                     } currentValueLabel: {
                                         Text (
                                             $device.wrappedValue.temperature.description
@@ -42,9 +45,20 @@ struct RoomView: View {
                                 }
                                 .gaugeStyle(.accessoryCircular)
                                 .tint(gradient)
+                                .padding(.top, 30)
+                                
+                                Stepper(
+                                    "",
+                                    value: $device.temperature,
+                                    in: 15...30,
+                                    step: 0.5
+                                )
+                                
+                                .frame(width: 100)
                                 
                             }
                         }
+                        Spacer()
                     }
                     .padding(.leading, 30)
                     Spacer()
@@ -54,7 +68,7 @@ struct RoomView: View {
                                 if(
                                     $device.wrappedValue.room == room && $device.wrappedValue
                                         .type == .light){
-                                    Image(systemName: $device.wrappedValue.isOn ? "lightbulb.min.fill" : "lightbulb")
+                                    Image(systemName: $device.wrappedValue.isOn ? "lightbulb.fill" : "lightbulb")
                                         .foregroundStyle($device.wrappedValue.isOn ? .yellow : .white)
                                         .rotationEffect(.degrees(180))
                                         .font(.system(size: 25))
@@ -112,15 +126,15 @@ struct RoomView: View {
                                 .padding([.top, .leading], 30)
                                 .foregroundStyle(.white)
                             Spacer()
-                            Button(action: {
-                                roomViewVisible.toggle()
-                            }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.red)
-                                    .background(.black)
-                                    .clipShape(Circle())
-                            }
-                            .padding([.top, .trailing], 30)
+//                            Button(action: {
+//                                roomViewVisible.toggle()
+//                            }) {
+//                                Image(systemName: "xmark.circle.fill")
+//                                    .foregroundColor(.red)
+//                                    .background(.black)
+//                                    .clipShape(Circle())
+//                            }
+//                            .padding([.top, .trailing], 30)
                         }
                     }
                 )
@@ -152,88 +166,5 @@ struct RoomView: View {
 
 
 #Preview {
-    RoomView(roomViewVisible: .constant(true), objects: .constant([
-        SmartDevice(
-            name: "Wohnzimmerlicht",
-            room: .livingRoom,
-            type: .light,
-            isOn: true
-        ),
-        SmartDevice(
-            name: "Küchenlicht",
-            room: .kitchen,
-            type: .light,
-            isOn: false
-        ),
-        SmartDevice(
-            name: "Badezimmerlicht",
-            room: .bathroom,
-            type: .light,
-            isOn: true
-        ),
-        SmartDevice(
-            name: "Schlafzimmerlicht",
-            room: .bedroom,
-            type: .light,
-            isOn: false
-        ),
-        SmartDevice(
-            name: "Heizung",
-            room: .livingRoom,
-            type: .thermostat,
-            isOn: true,
-            temperature: 22
-        ),
-        SmartDevice(
-            name: "Heizung",
-            room: .bedroom,
-            type: .thermostat,
-            isOn: true,
-            temperature: 18
-        ),
-        SmartDevice(
-            name: "Heizung",
-            room: .office,
-            type: .thermostat,
-            isOn: true,
-            temperature: 20
-        ),
-        SmartDevice(
-            name: "Heizung",
-            room: .childrenRoom,
-            type: .thermostat,
-            isOn: true,
-            temperature: 22
-        ),
-        SmartDevice(
-            name: "Wohnungstür",
-            room: .corridor,
-            type: .lock,
-            isLocked: true
-        ),
-        SmartDevice(
-            name: "Wohnzimmertür",
-            room: .livingRoom,
-            type: .lock,
-            isLocked: false
-        ),
-        SmartDevice(
-            name: "Badezimmertür",
-            room: .bathroom,
-            type: .lock,
-            isLocked: true
-        ),
-        SmartDevice(
-            name: "Kinderzimmertür",
-            room: .childrenRoom,
-            type: .lock,
-            isLocked: false
-        ),
-        SmartDevice(
-            name: "Bürotür",
-            room: .office,
-            type: .lock,
-            isLocked: true
-        ),
-    ]))
+    RoomView(roomViewVisible: .constant(true), objects: .constant(mockup_objects))
 }

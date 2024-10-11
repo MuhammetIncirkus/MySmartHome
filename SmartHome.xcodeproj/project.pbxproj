@@ -10,6 +10,7 @@
 		CE75F2232C8B1486001AD0A3 /* SmartHomeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75F2222C8B1486001AD0A3 /* SmartHomeApp.swift */; };
 		CE75F2272C8B1486001AD0A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F2262C8B1486001AD0A3 /* Assets.xcassets */; };
 		CE75F22A2C8B1486001AD0A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */; };
+		D30A896B2CB906F500D34516 /* Mockups.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A896A2CB906EA00D34516 /* Mockups.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		CE75F2222C8B1486001AD0A3 /* SmartHomeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeApp.swift; sourceTree = "<group>"; };
 		CE75F2262C8B1486001AD0A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D30A896A2CB906EA00D34516 /* Mockups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockups.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -66,6 +68,7 @@
 		CE75F2282C8B1486001AD0A3 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				D30A896A2CB906EA00D34516 /* Mockups.swift */,
 				CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -145,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D30A896B2CB906F500D34516 /* Mockups.swift in Sources */,
 				CE75F2232C8B1486001AD0A3 /* SmartHomeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

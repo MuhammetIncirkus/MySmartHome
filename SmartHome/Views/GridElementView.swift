@@ -14,10 +14,14 @@ struct GridElementView: View {
     
     var body: some View {
         VStack{
-            Text(object.type.rawValue == "🌡️ - Heizung" ?  object.temperature.description + " °C" : object.name)
+            Text(object.type.rawValue == "Heizung" ?  object.temperature.description + " °C" : object.name)
                 .foregroundStyle(.white)
-                .font(.subheadline)
-                .fontWeight(.light)
+                .font(
+                    object.type.rawValue == "Heizung" ? .title : .subheadline
+                )
+                .fontWeight(
+                    object.type.rawValue == "Heizung" ? .bold : .light
+                )
             
                 switch object.type {
                 case .lock:
@@ -32,7 +36,7 @@ struct GridElementView: View {
                 case .thermostat:
                     HStack{
                         Stepper(
-                            "🌡️",
+                            "",
                             value: $object.temperature,
                             in: 15...30,
                             step: 0.5
@@ -41,7 +45,7 @@ struct GridElementView: View {
                     }
                     
                 case .light:
-                    Image(systemName: object.isOn ? "lightbulb.min.fill" : "lightbulb")
+                    Image(systemName: object.isOn ? "lightbulb.fill" : "lightbulb")
                         .padding()
                         .font(.title)
                         .foregroundStyle(object.isOn ? .yellow : .white)

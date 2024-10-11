@@ -24,6 +24,7 @@ enum Rooms: String, CaseIterable, Identifiable  {
     case office = "Büro"
     case childrenRoom = "Kinderzimmer"
     case corridor = "Flur"
+//    case other = "Sonstiges Zimmer"
     
     var id: String { rawValue }
 }

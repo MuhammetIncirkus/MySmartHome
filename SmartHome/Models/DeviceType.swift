@@ -6,9 +6,10 @@
 //
 
 enum DeviceType: String, CaseIterable, Identifiable {
-    case light = "💡 - Licht"
-    case lock = "🚪 - Türschloss"
-    case thermostat = "🌡️ - Heizung"
+    case light = "Licht"
+    case lock = "Türschloss"
+    case thermostat = "Heizung"
+//    case other = "Sonstiges"
     
     var id: Self { self }
 }

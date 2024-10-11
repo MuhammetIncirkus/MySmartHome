@@ -29,7 +29,7 @@ struct ElementView: View {
                             .padding()
                             .foregroundStyle(.white)
                     case .light:
-                        Image(systemName: object.isOn ? "lightbulb.min.fill" : "lightbulb")
+                        Image(systemName: object.isOn ? "lightbulb.fill" : "lightbulb")
                             .padding()
                             .foregroundStyle(object.isOn ? .yellow : .white)
                             .contentTransition(.symbolEffect(.replace.offUp))
@@ -38,7 +38,7 @@ struct ElementView: View {
                 }
                 VStack(alignment: .leading){
                     Text(
-                        object.type.rawValue == "🌡️ - Heizung" ?  object.temperature.description + " °C" : object.name
+                        object.type.rawValue == "Heizung" ?  object.temperature.description + " °C" : object.name
                     )
                         .font(.headline)
                         .foregroundColor(.white)
@@ -52,10 +52,18 @@ struct ElementView: View {
                 VStack{
                     switch object.type {
                     case .lock:
-                        Button(object.isLocked ? "unlock" : "lock") {
+                        Button(action: {
                             object.isLocked.toggle()
-                        }.buttonStyle(.borderedProminent)
+                            },
+                               label: {
+                                    Image(systemName: object.isLocked ? "lock" : "lock.open")
+                                .frame(width: 30)
+                            })
+                            .buttonStyle(.borderedProminent)
+                            .tint(object.isLocked ? .red : .green)
+                            .opacity(0.8)
                             .contentTransition(.symbolEffect(.replace.offUp))
+
                     case .thermostat:
                         Slider(
                             value: $object.temperature, in: 15...30, step: 0.5) {
@@ -119,7 +127,7 @@ struct ElementView: View {
         object: .constant(SmartDevice(
             name: "String",
             room: Rooms.livingRoom,
-            type: DeviceType.light,
+            type: DeviceType.lock,
             isOn: false,
             temperature: 20.0,
             isLocked: false
