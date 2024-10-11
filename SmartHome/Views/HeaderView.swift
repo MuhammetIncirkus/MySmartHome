@@ -9,17 +9,30 @@ import SwiftUI
 
 struct HeaderView: View {
     
-    @Binding var smartHomeName: String
+    @State var smartHomeName = "My Home"
+    @Binding var roomViewVisible: Bool
     var body: some View {
-        Text(smartHomeName)
-            .font(.largeTitle)
-            .fontWeight(.bold)
+        HStack{
+            Text(smartHomeName)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.blueBackground)
+            Toggle(
+                roomViewVisible ? "Listen" : "Räume",
+                isOn: $roomViewVisible
+            )
+            .padding(.horizontal, 25)
             .foregroundStyle(.white)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.blueBackground)
+            .frame(width: 175)
+        }
+        
     }
 }
 
 #Preview {
-    HeaderView(smartHomeName: .constant("My Home"))
+    HeaderView(
+        roomViewVisible: .constant(true)
+    )
 }

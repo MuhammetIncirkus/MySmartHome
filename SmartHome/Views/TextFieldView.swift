@@ -1,5 +1,5 @@
 //
-//  TexFieldView.swift
+//  TextFieldView.swift
 //  SmartHome
 //
 //  Created by Muhammet Incirkus on 07.10.24.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct TexFieldView: View {
+struct TextFieldView: View {
     
     @Binding var itemName: String
-//    @Binding var itemName2: String
     @Binding var objects: [SmartDevice]
     @State private var selectedDeviceType: DeviceType = .light
     @State private var selectedRoom: Rooms = .livingRoom
@@ -36,12 +35,15 @@ struct TexFieldView: View {
                     .cornerRadius(30)
                     .formStyle(.columns)
                 Button("Hinzufügen"){
-                    let smartDevice: SmartDevice = SmartDevice(
-                        name: itemName,
-                        room: selectedRoom,
-                        type: selectedDeviceType
-                    )
-                    objects.append(smartDevice)
+                    if itemName != "" {
+                        let smartDevice: SmartDevice = SmartDevice(
+                            name: itemName,
+                            room: selectedRoom,
+                            type: selectedDeviceType
+                        )
+                        objects.append(smartDevice)
+                        itemName = ""
+                    }
                 }
                 .padding()
                 .foregroundStyle(.white)
@@ -51,14 +53,14 @@ struct TexFieldView: View {
             
             
         }
-        .padding(.horizontal)
+        //.padding(.horizontal)
         .padding(.top, 4)
         //.background(.red)
     }
 }
 
 #Preview {
-    TexFieldView(
+    TextFieldView(
         itemName: .constant(""),
         objects: .constant([])
         )

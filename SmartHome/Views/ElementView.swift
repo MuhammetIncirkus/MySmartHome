@@ -114,9 +114,13 @@ struct ElementView: View {
             .frame(width: geometry.size.width * 0.9, height: 60)
                         .background(.blueBackground)
                         .cornerRadius(20)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.blue, lineWidth: 1)
+                        )
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal)
-                        .shadow(color: .blue ,radius: 5)
+                        //.shadow(color: .blue ,radius: 5)
         }//.padding(.bottom)
     }
     

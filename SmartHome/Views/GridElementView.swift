@@ -81,8 +81,14 @@ struct GridElementView: View {
         .frame(width: 150, height: 150)
         .background(.blueBackground)
         .cornerRadius(20)
-        .padding()
-        .shadow(color: .blue ,radius: 10)
+        //.padding()
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.blue, lineWidth: 1)
+        )
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal)
+        //.shadow(color: .blue ,radius: 10)
     }
 }
 

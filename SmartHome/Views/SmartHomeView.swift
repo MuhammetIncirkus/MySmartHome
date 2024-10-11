@@ -11,73 +11,97 @@ struct SmartHomeView: View {
     
     @State var itemName = ""
     @State var itemName2 = ""
-    @State var roomViewVisible = false
+    @State var roomViewVisible = true
+    @State var textViewVisible = false
     @State var listView = true
-    @State var smartHomeName = "My Home"
     
- 
+    @State private var selectedRoom: Rooms? = nil
+    @State private var selectedType: DeviceType? = nil
     @State var objects: [SmartDevice]
     
 
     
     var body: some View {
         VStack{
-            HeaderView(smartHomeName: $smartHomeName)
+            HeaderView(
+                roomViewVisible: $roomViewVisible
+            )
                 .fixedSize(horizontal: false, vertical: true)
             ScrollView{
-                TexFieldView(itemName: $itemName, objects: $objects)
-                
+                if textViewVisible{
+                    TextFieldView(itemName: $itemName, objects: $objects)
+                        .padding()
+                }
+                //TextFieldView(itemName: $itemName, objects: $objects)
+            
                 if roomViewVisible{
-                    RoomView(
-                        roomViewVisible: $roomViewVisible,
-                        objects: $objects
-                    )
+                    RoomView(roomViewVisible: $roomViewVisible,objects: $objects)
                 } else {
                     if listView {
                         LazyVGrid(columns: [GridItem(.flexible())]) {
                             ForEach($objects){ $object in
-                                ElementView(
-                                    objects: $objects, object: $object
-                                )
-                                .padding(.vertical, 25)
+                                if(
+                                    (selectedRoom == nil || $object.wrappedValue.room == selectedRoom!) && (
+                                        selectedType == nil || $object.wrappedValue.type == selectedType!)
+                                ){
+                                    ElementView(objects: $objects, object: $object)
+                                    .padding(.vertical, 25)
+                                }
                             }
                         }.padding(.bottom, 25)
-                            
-                    } else{
+                     } else{
                         let columns = Array(
                             repeating: GridItem(.flexible()),
                             count: 2
                         )
                         LazyVGrid(columns: columns) {
                             ForEach($objects){ $object in
-                                GridElementView(object: $object)
-                                //.padding(.vertical, 25)
+                                if(
+                                    (selectedRoom == nil || $object.wrappedValue.room == selectedRoom!) && (
+                                        selectedType == nil || $object.wrappedValue.type == selectedType!)
+                                ){
+                                    GridElementView(object: $object)
+                                    //.padding(.vertical, 25)
+                                }
+                                
                             }
                         }
                     }
                 }
             }
-            .background(.grayBackground)
-            HStack{
-                Spacer()
-                if !roomViewVisible{
-                    Toggle(
-                        listView ? "Grid" : "Liste",
-                        isOn: $listView
-                    )
-                    .padding(.horizontal, 25)
-                    .foregroundStyle(.white)
+            .frame(width: .infinity)
+            .background(.graybackground)
+            .refreshable {
+                textViewVisible.toggle()
+            }
+            //.background(.grayBackground)
+            
+            if !roomViewVisible{
+                HStack{
+                    //Text("Filter: ").foregroundStyle(.white)
+                    Picker("Room", selection: $selectedRoom) {
+                        Text("Alle Räume").tag(Rooms?.none)
+                        ForEach(Rooms.allCases) { room in
+                            Text(room.rawValue).tag(room as Rooms?)
+                        }
+                    }.accentColor(.white)
+                    Picker("Typ", selection: $selectedType) {
+                        Text("Alle Objekte").tag(DeviceType?.none)
+                        ForEach(DeviceType.allCases) { device in
+                            Text(device.rawValue).tag(device as DeviceType?)
+                        }
+                    }.accentColor(.white)
                     
-                    .frame(width: 175)
-                }
-                
-                Toggle(
-                    roomViewVisible ? "Listen" : "Räume",
-                    isOn: $roomViewVisible
-                )
-                .padding(.horizontal, 25)
-                .foregroundStyle(.white)
-                .frame(width: 175)
+                    Spacer()
+                    Toggle(isOn: $listView) {
+                        Image(
+                            systemName: listView ? "list.bullet" : "square.grid.2x2.fill"
+                        )
+                        .foregroundStyle(.white)
+                    }.frame(width: 90)
+                        
+
+                }.padding(.horizontal)
             }
             
             

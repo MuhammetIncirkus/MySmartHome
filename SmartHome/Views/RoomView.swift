@@ -120,7 +120,7 @@ struct RoomView: View {
                     }
                     Spacer()
                 }
-                .frame(width: 355, height: 200)
+                .frame(width: .infinity, height: 200)
                 .cornerRadius(20)
                 .padding()
                 .background(
@@ -128,7 +128,7 @@ struct RoomView: View {
                         Image(imageName)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 355, height: 200)
+                            .frame(width: .infinity, height: 200)
                             .clipped()
                             .background(.white)
                             .cornerRadius(20)
